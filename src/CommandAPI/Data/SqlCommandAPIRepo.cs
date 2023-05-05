@@ -13,23 +13,6 @@ namespace CommandAPI.Data
         {
             _context = context;
         }
-        public void CreateCommand(Command cmd)
-        {
-            if (cmd == null)
-            {
-                throw new ArgumentNullException(nameof(cmd));
-            }
-            _context.CommandItems.Add(cmd);
-        }
-
-        public void DeleteCommand(Command cmd)
-        {
-            if(cmd == null)
-            {
-                throw new ArgumentNullException(nameof(cmd));
-            }
-            _context.CommandItems.Remove(cmd);
-        }
 
         public IEnumerable<Command> GetAllCommands()
         {
@@ -41,14 +24,31 @@ namespace CommandAPI.Data
             return _context.CommandItems.FirstOrDefault(p => p.Id == id);
         }
 
-        public bool SaveChanges()
+        public void CreateCommand(Command cmd)
         {
-            return (_context.SaveChanges() >= 0);
+            if (cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+            _context.CommandItems.Add(cmd);
         }
-
         public void UpdateCommand(Command cmd)
         {
             // We don't need to do anything here
+        }
+
+        public void DeleteCommand(Command cmd)
+        {
+            if(cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+            _context.CommandItems.Remove(cmd);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
